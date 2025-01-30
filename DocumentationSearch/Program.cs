@@ -1,16 +1,17 @@
-﻿using Microsoft.Extensions.AI;
+﻿using DocumentationSearch;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OpenAI;
 
-// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+HostApplicationBuilder builder = Host.CreateApplicationBuilder();
 
 var openAIApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator = new OpenAIClient(openAIApiKey)
+            .AsEmbeddingGenerator("text-embedding-3-small");
 
-IEmbeddingGenerator<string, Embedding<float>> generator = new OpenAIClient(openAIApiKey)
-    .AsEmbeddingGenerator("text-embedding-3-small");
+builder.Services.AddSingleton(embeddingGenerator);
+builder.Services.AddHostedService<DocumentationSearchRunner>();
 
-Console.WriteLine(generator);
-
-var embedding = await generator.GenerateEmbeddingAsync("monopoly");
-
-Console.WriteLine(embedding);
+IHost host = builder.Build();
+host.Run();
