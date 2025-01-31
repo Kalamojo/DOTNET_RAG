@@ -9,7 +9,6 @@ public class DocumentationSearchRunner : IHostedService
 {
     
     private readonly ITextEmbeddingGenerationService _embeddingGenerator;
-
     private readonly ILogger<DocumentationSearchRunner> _logger;
     private readonly IHostApplicationLifetime _appLifetime;
     
