@@ -1,16 +1,19 @@
 ﻿using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.SemanticKernel.Embeddings;
 
 namespace DocumentationSearch;
 
 public class DocumentationSearchRunner : IHostedService
 {
-    IEmbeddingGenerator<string, Embedding<float>> _embeddingGenerator;
+    
+    private readonly ITextEmbeddingGenerationService _embeddingGenerator;
+
     private readonly ILogger<DocumentationSearchRunner> _logger;
     private readonly IHostApplicationLifetime _appLifetime;
     
-    public DocumentationSearchRunner(IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator,
+    public DocumentationSearchRunner(ITextEmbeddingGenerationService embeddingGenerator,
         ILogger<DocumentationSearchRunner> logger, IHostApplicationLifetime appLifetime)
     {
         _embeddingGenerator = embeddingGenerator;
@@ -25,7 +28,8 @@ public class DocumentationSearchRunner : IHostedService
 
         var embedding = await _embeddingGenerator.GenerateEmbeddingAsync("monopoly");
 
-        _logger.LogInformation(string.Join(", ", embedding.Vector.ToArray()));
+        _logger.LogInformation(string.Join(", ", embedding.ToArray()));
+        _logger.LogInformation(embedding.Length.ToString());
 
         _appLifetime.StopApplication();
     }
