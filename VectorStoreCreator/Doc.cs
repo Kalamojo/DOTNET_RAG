@@ -5,7 +5,7 @@ namespace VectorStoreCreator;
 public class Doc
 {
     [VectorStoreRecordKey]
-    public Guid DocId {  get; init; }
+    public ulong DocId {  get; init; }
 
     [VectorStoreRecordData]
     public required string Text { get; init; }

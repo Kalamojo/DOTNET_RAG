@@ -6,7 +6,7 @@ using VectorStoreCreator;
 var connString = Environment.GetEnvironmentVariable("SQLITE_CONN");
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder();
-builder.Services.AddSqliteVectorStoreRecordCollection<string, Doc>(connString);
+builder.Services.AddSqliteVectorStore(connString);
 builder.Services.AddHostedService<VectorStoreCreatorRunner>();
 
 IHost host = builder.Build();

@@ -6,11 +6,11 @@ namespace VectorStoreCreator
 {
     public class VectorStoreCreatorRunner : IHostedService
     {
-        private readonly IVectorStoreRecordCollection<string, Doc> _vectorStore;
+        private readonly IVectorStore _vectorStore;
         private readonly ILogger<VectorStoreCreatorRunner> _logger;
         private readonly IHostApplicationLifetime _appLifetime;
 
-        public VectorStoreCreatorRunner(IVectorStoreRecordCollection<string, Doc> vectorStore,
+        public VectorStoreCreatorRunner(IVectorStore vectorStore,
         ILogger<VectorStoreCreatorRunner> logger, IHostApplicationLifetime appLifetime)
         {
             _vectorStore = vectorStore;
@@ -22,6 +22,9 @@ namespace VectorStoreCreator
         {
             _logger.LogInformation("VectorStoreCreator Runner starting.");
             _logger.LogInformation(_vectorStore.ToString());
+
+            var collection = _vectorStore.GetCollection<ulong, Doc>(Constants.CollectionName);
+            await collection.CreateCollectionIfNotExistsAsync(cancellationToken);
 
             _appLifetime.StopApplication();
         }
