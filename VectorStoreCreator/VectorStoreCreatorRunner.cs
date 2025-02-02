@@ -101,7 +101,7 @@ namespace VectorStoreCreator
         {
             var sectionContent = string.Join("\n", contents.Select(item => item.TextContent));
 
-            _logger.LogInformation("{URL} - {Section} loaded", url, section);
+            _logger.LogInformation("Starting {URL} - {Section} loaded...", url, section);
 
             await collection.UpsertAsync(new Doc()
             {
@@ -112,7 +112,7 @@ namespace VectorStoreCreator
                 Embedding = await _embeddingGenerator.GenerateEmbeddingAsync(sectionContent, cancellationToken: cancellationToken)
             }, cancellationToken: cancellationToken);
 
-            _logger.LogInformation("Actually did sum");
+            _logger.LogInformation("Completed {URL} - {Section} loaded", url, section);
         }
 
         private static string ToAbsolute(string startingUrl, string? relativeUrl)
