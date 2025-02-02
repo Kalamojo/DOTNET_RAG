@@ -20,17 +20,18 @@ public class DocumentationSearchRunner : IHostedService
         _appLifetime = appLifetime;
     }
 
-    public async Task StartAsync(CancellationToken cancellationToken)
+    public Task StartAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("DocumentationSearch Runner starting.");
         _logger.LogInformation(_embeddingGenerator.ToString());
 
-        var embedding = await _embeddingGenerator.GenerateEmbeddingAsync("monopoly");
+        var embedding = _embeddingGenerator.GenerateEmbeddingAsync("monopoly", cancellationToken: cancellationToken).Result;
 
         _logger.LogInformation(string.Join(", ", embedding.ToArray()));
         _logger.LogInformation(embedding.Length.ToString());
 
-        _appLifetime.StopApplication();
+        //_appLifetime.StopApplication();
+        return Task.CompletedTask;
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
