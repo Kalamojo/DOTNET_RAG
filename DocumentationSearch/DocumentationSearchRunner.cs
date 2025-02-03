@@ -41,7 +41,17 @@ public class DocumentationSearchRunner : IHostedService
 
         OpenAIPromptExecutionSettings settings = new() { FunctionChoiceBehavior = FunctionChoiceBehavior.Auto() };
         KernelArguments arguments = new(settings);
-        Console.WriteLine(await _kernel.InvokePromptAsync("Have there been any updates to escape sequences in .NET 9?", arguments));
+
+        string? input;
+        while (true)
+        {
+            Console.WriteLine("Ask anything to LLM");
+            input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input))
+                break;
+            var response = await _kernel.InvokePromptAsync(input, arguments);
+            Console.WriteLine($"\nLLM: {response}\n");
+        }
 
         _appLifetime.StopApplication();
     }
