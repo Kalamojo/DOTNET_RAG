@@ -4,7 +4,9 @@
 
 To run the VectorStoreCreator and DocumentationSearch projects, a few environment variables need to be provided in the project properties. These can be set in Visual Studio by right clicking on a project in the Solution Explorer and going to:
 
+```md
 Properties &rarr; Debug &rarr; General &rarr; Open debug launch profiles UI &rarr; Environment Variables
+```
 
 And adding a new entry in the table. For the purpose of running these projects, please add the following environment variables to each:
 
