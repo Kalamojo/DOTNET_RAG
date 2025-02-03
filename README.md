@@ -10,7 +10,7 @@ And adding a new entry in the table. For the purpose of running these projects, 
 
 1. Acquire OpenAI API key and set it as `OPENAI_API_KEY`
 2. Provide an SQLite connection string for `SQLITE_CONN`
-    - ex.) `Data Source=C:\Users\myUser\DOTNET_Semantic_Search\dotnet_docs.db;`
+    - ex.) `Data Source=C:\Users\myUser\DOTNET_RAG\dotnet_docs.db;`
 
 ## Execution
 
