@@ -49,7 +49,7 @@ public class DocumentationSearchRunner : IHostedService
             input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
                 break;
-            var response = await _kernel.InvokePromptAsync(input, arguments);
+            var response = await _kernel.InvokePromptAsync(input, arguments, cancellationToken: cancellationToken);
             Console.WriteLine($"\nLLM: {response}\n");
         }
 
