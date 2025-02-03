@@ -39,7 +39,7 @@ namespace VectorStoreCreator
 
         private async Task<HashSet<string>> RetrievePageUrls(string startingUrl, CancellationToken cancellationToken)
         {
-            HashSet<string> urls = new() { startingUrl };
+            HashSet<string> urls = [startingUrl];
 
             using (HttpClient client = new HttpClient())
             {
@@ -54,7 +54,7 @@ namespace VectorStoreCreator
                 var foundUrls = linkElements?.Where(link => link.TextContent.StartsWith("What's new"))
                     .Select(link => ToAbsolute(startingUrl, link.GetAttribute("href")));
                 
-                foreach (var url in foundUrls)
+                foreach (var url in foundUrls ?? [string.Empty])
                 {
                     urls.Add(url);
                 }

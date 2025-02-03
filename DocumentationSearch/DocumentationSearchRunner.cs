@@ -10,7 +10,6 @@ namespace DocumentationSearch;
 
 public class DocumentationSearchRunner : IHostedService
 {
-    
     private readonly ITextEmbeddingGenerationService _embeddingGenerator;
     private readonly IVectorStoreRecordCollection<string, Doc> _collection;
     private readonly Kernel _kernel;
@@ -36,10 +35,10 @@ public class DocumentationSearchRunner : IHostedService
 
         var textSearch = new VectorStoreTextSearch<Doc>(_collection, _embeddingGenerator);
 
-        var searchPlugin = textSearch.CreateWithGetTextSearchResults("SearchPlugin");
+        var searchOptions = new TextSearchOptions() { Top = 3, Skip = 0 };
+        var searchPlugin = KernelPluginFactory.CreateFromFunctions("SearchPlugin", [textSearch.CreateGetTextSearchResults(searchOptions: searchOptions)]);
         _kernel.Plugins.Add(searchPlugin);
 
-        // Invoke prompt and use text search plugin to provide grounding information
         OpenAIPromptExecutionSettings settings = new() { FunctionChoiceBehavior = FunctionChoiceBehavior.Auto() };
         KernelArguments arguments = new(settings);
         Console.WriteLine(await _kernel.InvokePromptAsync("Have there been any updates to escape sequences in .NET 9?", arguments));

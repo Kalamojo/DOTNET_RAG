@@ -3,8 +3,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.SemanticKernel;
 using VectorStoreCreator;
 
-var connString = Environment.GetEnvironmentVariable("SQLITE_CONN");
-var openAIApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+var connString = Environment.GetEnvironmentVariable("SQLITE_CONN") ?? string.Empty;
+var openAIApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? string.Empty;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder();
 

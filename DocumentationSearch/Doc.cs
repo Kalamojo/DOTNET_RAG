@@ -20,6 +20,6 @@ public class Doc
     [TextSearchResultLink]
     public required string Link { get; init; }
 
-    [VectorStoreRecordVector(Constants.VectorDimensions)]
+    [VectorStoreRecordVector(Constants.VectorDimensions, DistanceFunction.CosineDistance)]
     public ReadOnlyMemory<float> Embedding { get; init; }
 }
