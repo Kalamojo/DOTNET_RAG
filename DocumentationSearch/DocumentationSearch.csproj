@@ -19,7 +19,6 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.OpenAI" Version="1.35.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Connectors.Sqlite" Version="1.35.0-preview" />
-    <PackageReference Include="Microsoft.SemanticKernel.PromptTemplates.Handlebars" Version="1.35.0" />
   </ItemGroup>
 
   <ItemGroup>
