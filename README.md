@@ -11,3 +11,8 @@ And adding a new entry in the table. For the purpose of running these projects, 
 1. Acquire OpenAI API key and set it as `OPENAI_API_KEY`
 2. Provide an SQLite connection string for `SQLITE_CONN`
     - ex.) `Data Source=C:\Users\myUser\DOTNET_Semantic_Search\dotnet_docs.db;`
+
+## Execution
+
+1. Run VectorStoreCreator project and terminate it once vector store update logs stop being made
+2. Run DocumentationSearch project and ask away about .NET 9
