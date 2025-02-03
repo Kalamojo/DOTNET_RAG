@@ -1,4 +1,4 @@
-# .NET Semantic Search
+# .NET Retrieval Augmented Generation
 
 ## SetUp
 
